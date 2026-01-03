@@ -1,0 +1,37 @@
+<div id="app" style="padding: 20px; text-align: center;">
+    <h1>Modo de Visualização</h1>
+    <p>Clique no botão para alternar entre Dark e Light Mode.</p>
+    <button id="themeToggle">Alternar Tema</button>
+</div>
+
+<style>
+    /* Estilos para o modo claro (padrão) */
+    body { background-color: #ffffff; color: #000000; transition: 0.3s; }
+    /* Estilos para o modo escuro */
+    body.dark-mode { background-color: #2c3e50; color: #ecf0f1; }
+    button { padding: 10px 20px; cursor: pointer; border-radius: 5px; }
+</style>
+
+<script>
+    const btn = document.getElementById('themeToggle');
+    const currentTheme = localStorage.getItem('theme');
+
+    // Verifica se o usuário já tinha uma preferência salva
+    if (currentTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+    }
+
+    // Função que executa a troca de tema
+    btn.addEventListener('click', () => {
+        // Alterna a classe 'dark-mode' no elemento body
+        document.body.classList.toggle('dark-mode');
+        
+        // Salva a escolha no localStorage para persistência
+        let theme = 'light';
+        if (document.body.classList.contains('dark-mode')) {
+            theme = 'dark';
+        }
+        localStorage.setItem('theme', theme);
+        console.log(`Tema atual: ${theme}`);
+    });
+</script>
