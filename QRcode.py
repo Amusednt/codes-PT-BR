@@ -1,14 +1,14 @@
-import qrcode # Biblioteca para gerar o código
+import qrcode # Library to generate the code
 import os
 
-def gerar_qr_code(conteudo, nome_arquivo="meu_qrcode.png"):
+def generate_qr_code(content, file_name="my_qrcode.png"):
     """
-    Cria uma imagem de QR Code a partir de um texto ou link.
-    :param conteudo: Link ou texto que o QR Code deve conter.
-    :param nome_arquivo: Nome do arquivo de imagem salvo.
+    Creates a QR Code image from a text or link.
+    :param content: Link or text to be encoded in the QR Code.
+    :param file_name: Name of the saved image file.
     """
     try:
-        # Configuração do QR Code (tamanho, borda e erro)
+        # QR Code configuration (size, border, and error correction)
         qr = qrcode.QRCode(
             version=1,
             error_correction=qrcode.constants.ERROR_CORRECT_L,
@@ -16,18 +16,18 @@ def gerar_qr_code(conteudo, nome_arquivo="meu_qrcode.png"):
             border=4,
         )
         
-        qr.add_data(conteudo)
+        qr.add_data(content)
         qr.make(fit=True)
 
-        # Gera a imagem usando a biblioteca Pillow (PIL)
+        # Generates the image using the Pillow (PIL) library
         img = qr.make_image(fill_color="black", back_color="white")
-        img.save(nome_arquivo)
+        img.save(file_name)
         
-        print(f"✅ QR Code gerado com sucesso: {os.path.abspath(nome_arquivo)}")
+        print(f"✅ QR Code generated successfully: {os.path.abspath(file_name)}")
 
     except Exception as e:
-        print(f"❌ Erro ao gerar QR Code: {e}")
+        print(f"❌ Error generating QR Code: {e}")
 
-# Exemplo de uso:
+# Example usage:
 if __name__ == "__main__":
-    gerar_qr_code("https://github.com/seu-usuario", "github_link.png")
+    generate_qr_code("https://github.com/your-user", "github_link.png")
